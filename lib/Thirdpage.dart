@@ -39,7 +39,7 @@ class _ThirdpageState extends State<Thirdpage> {
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
           CircleAvatar(
-          backgroundImage: AssetImage('assets/images/1.png'),
+          backgroundImage: AssetImage('assets/images/z1.jpg'),
             backgroundColor: Colors.transparent,
           ),
         ],
