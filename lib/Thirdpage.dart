@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'a.dart';
+import 'b.dart';
 
 class Thirdpage extends StatefulWidget {
   const Thirdpage(User user, {super.key});
@@ -118,30 +119,38 @@ class _ThirdpageState extends State<Thirdpage> {
                 scrollDirection: Axis.horizontal,
                 itemCount: categories.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          margin: EdgeInsets.only(left: 20),
-                          // decoration: BoxDecoration(
-                          //     color: Colors.grey,
-                          //     borderRadius: BorderRadius.circular(10)),
-                          child: Image.asset(
-                            categories[index]['iconPath'],
-                            height: 100,
-                            width: 100,
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const B()),
+                      );
+                    },
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            margin: EdgeInsets.only(left: 20),
+                            // decoration: BoxDecoration(
+                            //     color: Colors.grey,
+                            //     borderRadius: BorderRadius.circular(10)),
+                            child: Image.asset(
+                              categories[index]['iconPath'],
+                              height: 100,
+                              width: 100,
+                            ),
                           ),
-                        ),
-                        // SizedBox(
-                        //   height: 10,
-                        // ),
-                        Text(
-                          categories[index]['name'],
-                          style: TextStyle(color: Colors.black),
-                          textAlign: TextAlign.center,
-                        )
-                      ],
+                          // SizedBox(
+                          //   height: 10,
+                          // ),
+                          Text(
+                            categories[index]['name'],
+                            style: TextStyle(color: Colors.black),
+                            textAlign: TextAlign.center,
+                          )
+                        ],
+                      ),
                     ),
                   );
                 }),
@@ -169,11 +178,21 @@ class _ThirdpageState extends State<Thirdpage> {
                 childAspectRatio: 16/9,
               ),
               children: [
-                Container(
-                  height: 156,
-                  width: 135,
-                  child: Image.asset("assets/images/1.png"),
+                
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const B()),
+                    );
+                  },
+                  child: Container(
+                    height: 156,
+                    width: 135,
+                    child: Image.asset("assets/images/1.png"),
+                  ),
                 ),
+                
                 Container(
                   height: 156,
                   width: 135,
