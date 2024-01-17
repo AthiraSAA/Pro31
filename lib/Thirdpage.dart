@@ -9,7 +9,8 @@ import 'a.dart';
 import 'b.dart';
 
 class Thirdpage extends StatefulWidget {
-  const Thirdpage(User user, {super.key});
+  late String name;
+   Thirdpage(User user, {super.key,required this.name});
 
   @override
   State<Thirdpage> createState() => _ThirdpageState();
@@ -45,184 +46,301 @@ class _ThirdpageState extends State<Thirdpage> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(children: [
-          Column(
-            children: [
-              TextField(
-                onChanged: (value) {
-                  // Here you can implement your search logic
-                  print('Searching for: $value');
-                },
-                decoration: InputDecoration(
-                  labelText: 'Search Product',
-                  hintText: 'Enter product name',
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 200,
-                child: CarouselSlider(
-                  options: CarouselOptions(
-                    height: 400.0,
-                    aspectRatio: 16 / 9,
-                    viewportFraction: 0.8,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    reverse: false,
-                    autoPlay: true,
-                    autoPlayInterval: Duration(seconds: 3),
-                    autoPlayAnimationDuration: Duration(milliseconds: 800),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                    enlargeFactor: 0.3,
-                    scrollDirection: Axis.horizontal,
-                  ),
-                  items: image.map((i) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                            width: MediaQuery.of(context).size.width,
-                            margin: EdgeInsets.symmetric(horizontal: 5.0),
-                            decoration: BoxDecoration(color: Colors.amber),
-                            child: Image.network(
-                              "${i}",
-                              fit: BoxFit.fill,
-                            ));
-                      },
-                    );
-                  }).toList(),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(children: [
-                Text(
-                  'Categories',
-                  style: GoogleFonts.poppins(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ]),
-            ],
-          ),
-          Container(
-            height: 150,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: categories.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const B()),
-                      );
-                    },
-                    child: Container(
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(10),
-                            margin: EdgeInsets.only(left: 20),
-                            // decoration: BoxDecoration(
-                            //     color: Colors.grey,
-                            //     borderRadius: BorderRadius.circular(10)),
-                            child: Image.asset(
-                              categories[index]['iconPath'],
-                              height: 100,
-                              width: 100,
-                            ),
-                          ),
-                          // SizedBox(
-                          //   height: 10,
-                          // ),
-                          Text(
-                            categories[index]['name'],
-                            style: TextStyle(color: Colors.black),
-                            textAlign: TextAlign.center,
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                }),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            children: [
-              Text("Top Products",
-                  style: GoogleFonts.poppins(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
-                  )),
-            ],
-          ),
-          Container(
-            height: 504,
-            width: 328,
-            child: GridView(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                childAspectRatio: 16/9,
-              ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
               children: [
-                
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const B()),
+            TextFormField(
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: "Search product that you wish to buy",
+                  prefixIcon: (Icon(Icons.search))),
+            ),
+            SizedBox(height: 35,),
+            Container(
+              height: 200,
+              child: CarouselSlider(
+                options: CarouselOptions(
+                  height: 400.0,
+                  aspectRatio: 16 / 9,
+                  viewportFraction: 0.8,
+                  initialPage: 0,
+                  enableInfiniteScroll: true,
+                  reverse: false,
+                  autoPlay: true,
+                  autoPlayInterval: Duration(seconds: 3),
+                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  enlargeCenterPage: true,
+                  enlargeFactor: 0.3,
+                  scrollDirection: Axis.horizontal,
+                ),
+                items: image.map((i) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return Container(
+                          width: MediaQuery.of(context).size.width,
+                          margin: EdgeInsets.symmetric(horizontal: 5.0),
+                          decoration: BoxDecoration(color: Colors.amber),
+                          child: Image.network(
+                            "${i}",
+                            fit: BoxFit.fill,
+                          ));
+                    },
+                  );
+                }).toList(),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "Categories",
+                  style: GoogleFonts.poppins(
+                    // textStyle: Theme.of(context).textTheme.displayLarge,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700,
+                      fontStyle: FontStyle.normal,
+                      color: Color(0xff494949)),
+                ),
+              ),
+            ]),
+            SizedBox(height: 10,),
+            Container(
+              height: 150,
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: categories.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>  B(name:"Laptops")),
+                        );
+                      },
+                      child: Container(
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              margin: EdgeInsets.only(left: 20),
+                              child: Image.asset(
+                                categories[index]['iconPath'],
+                                height: 84,
+                                width: 56,
+                              ),
+                            ),
+                            // SizedBox(
+                            //   height: 10,
+                            // ),
+                            Text(
+                              categories[index]['name'],
+                              style: TextStyle(color: Colors.black),
+                              textAlign: TextAlign.center,
+                            )
+                          ],
+                        ),
+                      ),
                     );
-                  },
-                  child: Container(
-                    height: 156,
-                    width: 135,
-                    child: Image.asset("assets/images/1.png"),
-                  ),
-                ),
-                
-                Container(
-                  height: 156,
-                  width: 135,
-                  child: Image.asset("assets/images/2.png"),
-                ),
-                Container(
-                  height: 156,
-                  width: 135,
-                  child: Image.asset("assets/images/3.png"),
-                ),
-                Container(
-                  height: 156,
-                  width: 135,
-                  child: Image.asset("assets/images/4.png"),
-                ),
+                  }),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Text("Top Products",
+                    style: GoogleFonts.poppins(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700,
+                    )),
               ],
             ),
-          ),
+                Container(
+                    height: 504,
+                    child: GridView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: 10,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisExtent: 250,
+                          crossAxisSpacing: 4.0,
+                          mainAxisSpacing:4.0),
+                      itemBuilder: (BuildContext context, int index) {
+                        return InkWell(
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) =>  A(name:"Laptops")),
+                            );
+                          },
+                          child: Container(
+                            height: 248,
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  left:10,
+                                  right: 10,
+                                  top: 10,
+                                  child: Container(height: 156,
+                                    width: 135,
 
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => A()),
-                );
-              },
-              child: Text(
-                "View more",
-              )),
-        ]),
+                                    child: Image.asset("assets/images/1.png",fit: BoxFit.fill,),
+                                  ),
+                                ),
+                                Positioned(top: 176,
+                                    right: 0,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(4),
+                                        color:Colors.greenAccent,
+                                      ),
+                                      height: 17,
+                                      width: 35,
+                                      child: Center(
+                                        child: Text("4.3",style: TextStyle(
+                                            fontSize: 11,
+                                            color: Colors.white
+                                        ),),
+                                      ),)),
+                                Positioned(top: 191,
+                                    left: 10,
+                                    child: Container(
+
+                                      child:  Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            width: 156,
+                                            child: Text(
+                                              textAlign:TextAlign.start,
+                                              "Poco",
+                                              style: GoogleFonts.poppins(
+                                                // textStyle: Theme.of(context).textTheme.displayLarge,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontStyle: FontStyle.normal,
+                                                  color: Color(0xff494949)),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 156,
+                                            child: Text(
+                                              "POCO C55(Forest Green)",
+                                              style: GoogleFonts.poppins(
+                                                // textStyle: Theme.of(context).textTheme.displayLarge,
+                                                  fontSize: 11,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontStyle: FontStyle.normal,
+                                                  color: Color(0xff494949)),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 156,
+                                            child: Text(
+                                              "6 GB RAM",
+                                              style: GoogleFonts.poppins(
+                                                // textStyle: Theme.of(context).textTheme.displayLarge,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontStyle: FontStyle.normal,
+                                                  color: Color(0xff494949)),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 156,
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  "-45 %  ",
+                                                  style: GoogleFonts.poppins(
+                                                    // textStyle: Theme.of(context).textTheme.displayLarge,
+                                                      fontSize: 10,
+                                                      fontWeight: FontWeight.w700,
+                                                      fontStyle: FontStyle.normal,
+                                                      color: Color(0xff1bbf00)),
+                                                ),
+                                                Text(
+                                                  "\u{20B9}1399",
+                                                  style: GoogleFonts.poppins(
+                                                    // textStyle: Theme.of(context).textTheme.displayLarge,
+                                                      fontSize: 10,
+                                                      decoration: TextDecoration.lineThrough,
+                                                      fontWeight: FontWeight.w700,
+                                                      fontStyle: FontStyle.normal,
+                                                      color: Color(0xff000000)),
+                                                ),
+                                                Expanded(child: SizedBox(width: 10,)),
+                                                Text(
+                                                  "\u{20B9}7499",
+                                                  style: GoogleFonts.poppins(
+                                                    // textStyle: Theme.of(context).textTheme.displayLarge,
+                                                      fontSize: 14,
+                                                      fontWeight: FontWeight.w700,
+                                                      fontStyle: FontStyle.normal,
+                                                      color: Color(0xff000000)),
+                                                ),
+                                                SizedBox(width: 5,)
+                                              ],
+                                            ),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(4),
+                                                  color:Colors.greenAccent,
+                                                ),
+                                                height: 17,
+                                                width: 35,
+                                                child: Center(
+                                                  child: Text("4.3",style: TextStyle(
+                                                      fontSize: 11,
+                                                      color: Colors.white
+                                                  ),),
+                                                ),),
+                                              Text(
+                                                " Rating",
+                                                style: GoogleFonts.poppins(
+                                                  // textStyle: Theme.of(context).textTheme.displayLarge,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w400,
+                                                    fontStyle: FontStyle.normal,
+                                                    color: Color(0xff47444)),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )
+
+                                      ,))
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    )),
+
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orange, // background (button) color
+                  foregroundColor: Colors.white, // foreground (text) color
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => A(name: '',)),
+                  );
+                },
+                child: Text(
+                  "View more",
+                )),
+          ]),
+        ),
       ),
     );
   }

@@ -8,7 +8,7 @@ import 'Products.dart';
 import 'ResponceMain.dart';
 
 class A extends StatefulWidget {
-  const A({super.key});
+  const A({super.key, required String name});
 
   @override
   State<A> createState() => _AState();

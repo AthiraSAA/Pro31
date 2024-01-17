@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Container(
           height: 104,
           width: 104,
-          child: SvgPicture.asset("assets/images/Logo112.svg"),
+          child: SvgPicture.asset("assets/images/Logo112.svg",fit: BoxFit.fill,),
         ),
       ),
     );
@@ -96,56 +96,59 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-        ),
-        body: Center(
-          child: Column(
-            children: <Widget>[
-              Container(
-                child: SvgPicture.asset("assets/images/Logo11.svg",semanticsLabel: 'Acme Logo',),
-              ),
-              SizedBox(height: 30),
-              Column(
+        appBar: AppBar(),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Center(
+              child: Column(
                 children: [
-                  Row(
-                    children: [
-                      Text("Let's begin",
-                          style: GoogleFonts.poppins(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w700,
-                          )),
-                    ],
+                  Container(
+                    child: SvgPicture.asset("assets/images/Logo11.svg",semanticsLabel: 'Acme Logo',),
                   ),
-                ],
-              ),
-              SizedBox(height: 10),
-              Text(
-                'Login with your google account to continue journey to world of electronic gadgets',
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(height: 100),
-              Container(
+                  SizedBox(height: 49),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text("Let's begin",
+                        style: GoogleFonts.poppins(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700,
+                        )),
+                  ),
+                  SizedBox(height: 24),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'Login with your google account to continue journey to world of electronic gadgets',
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 100),
+                Container(
+                  height: 45,
+                  width: MediaQuery.of(context).size.width,
                   child: SignInButton(
                     Buttons.google,
                     onPressed: () async {
                       User? user = await _handleSignIn();
-                      print('dataaaaaaaaaaaaaa${user!.displayName.toString()}');
+                      print('Welcome${user!.displayName.toString()}');
                       if (user != null) {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Thirdpage(user),
+                            builder: (context) => Thirdpage(user, name: '',),
                           ),
                         );
                       }
-
                     },
-                  )
-              )
-            ],
+                  ),
+                )
+                ],
+              ),
+            ),
           ),
         )
     );
